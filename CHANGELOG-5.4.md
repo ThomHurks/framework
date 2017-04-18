@@ -1,6 +1,76 @@
 # Release Notes for 5.4.x
 
-## [Unreleased]
+## v5.4.19 (2017-04-16)
+
+### Added
+- Added ability to send `link_names` parameter in Slack notification ([#18765](https://github.com/laravel/framework/pull/18765))
+- Added `Mailable::hasFrom()` method ([#18790](https://github.com/laravel/framework/pull/18790))
+
+### Changed
+- Made `Mailer` macroable ([#18763](https://github.com/laravel/framework/pull/18763))
+- Made `SessionGuard` macroable ([#18796](https://github.com/laravel/framework/pull/18796))
+- Improved queue worker output ([#18773](https://github.com/laravel/framework/pull/18773))
+- Added `newModelInstance()` method to Eloquent Builder ([#18775](https://github.com/laravel/framework/pull/18775))
+- Use assertions instead of exceptions in `MocksApplicationServices` ([#18774](https://github.com/laravel/framework/pull/18774))
+
+### Fixed
+- Fixed memory issue in `Container` ([#18812](https://github.com/laravel/framework/pull/18812))
+- Set database connection while retrieving models ([#18769](https://github.com/laravel/framework/pull/18769))
+
+
+## v5.4.18 (2017-04-10)
+
+### Added
+- Added `assertSuccessful()` and `assertRedirect()` to `TestResponse` ([#18629](https://github.com/laravel/framework/pull/18629))
+- Added `assertSeeText()` and `assertDontSeeText()` to `TestResponse` ([#18690](https://github.com/laravel/framework/pull/18690))
+- Added `assertJsonMissing()` to `TestResponse` ([#18721](https://github.com/laravel/framework/pull/18721), [786b782](https://github.com/laravel/framework/commit/786b7821e0009a4288bff032443f2b1a273ee459))
+- Added support for attaching an image to Slack attachments `$attachment->image($url)`([#18664](https://github.com/laravel/framework/pull/18664))
+- Added `Validator::extendDependent()` to allow adding custom rules that depend on other fields ([#18654](https://github.com/laravel/framework/pull/18654))
+- Added support for `--parent` option on `make:controller` ([#18606](https://github.com/laravel/framework/pull/18606))
+- Added `MessageSent` event to `Mailer` ([#18744](https://github.com/laravel/framework/pull/18744), [6c5f3a4](https://github.com/laravel/framework/commit/6c5f3a47c6308d1d4f2f5912c34cb85f57f0aeed))
+
+### Changed
+- Don't trim leading slashes on local filesystem base URLs ([acd66fe](https://github.com/laravel/framework/commit/acd66fef646fd5f7ca54380d55bc8e2e2cbe64b6))
+- Accept variable on `@empty()` directive ([#18738](https://github.com/laravel/framework/pull/18738))
+- Added `string` validation rules to `AuthenticatesUsers` ([#18746](https://github.com/laravel/framework/pull/18746))
+
+### Fixed
+- Fixed an issue with `Collection::groupBy()` when the provided value is a boolean ([#18674](https://github.com/laravel/framework/pull/18674))
+- Bring back an old behaviour in resolving controller method dependencies ([#18646](https://github.com/laravel/framework/pull/18646))
+- Fixed job release when exception occurs ([#18737](https://github.com/laravel/framework/pull/18737))
+- Fixed eloquent `increment()` and `decrement()` update attributes ([#18739](https://github.com/laravel/framework/pull/18739), [1728a88](https://github.com/laravel/framework/commit/1728a887e450f997a0dcde2ef84be2947b05af42))
+
+
+## v5.4.17 (2017-04-03)
+
+### Added
+- Added `getManager()` and `setManager()` to queue worker ([#18452](https://github.com/laravel/framework/pull/18452))
+- Added support for Pheanstalk's `$timeout` and `$persistent` options ([#18448](https://github.com/laravel/framework/pull/18448))
+- Added `Collection::times()` method ([#18457](https://github.com/laravel/framework/pull/18457))
+- Added PostgreSQL's `REAL` data type ([#18513](https://github.com/laravel/framework/pull/18513))
+- Added `flatMap` to collection higher order proxies ([#18529](https://github.com/laravel/framework/pull/18529))
+- Support multiple `--path` parameters with `migrate:reset` ([#18540](https://github.com/laravel/framework/pull/18540))
+- Store SparkPost `Transmission-ID` in the header after sending message ([#18594](https://github.com/laravel/framework/pull/18594))
+
+### Changed
+- Check for `Htmlable` instead of `HtmlString` in `Mailer::renderView()` ([#18459](https://github.com/laravel/framework/pull/18459), [da7b006](https://github.com/laravel/framework/commit/da7b006d8b236d8b29adb5f5f2696f1c2ec3e999))
+- Added mutex for schedule events ([#18295](https://github.com/laravel/framework/pull/18295), [ae2eb1f](https://github.com/laravel/framework/commit/ae2eb1f498aa6c2e6c45040d26fb9502eabab535))
+- Don't use helper functions in service providers ([#18506](https://github.com/laravel/framework/pull/18506), [#18521](https://github.com/laravel/framework/pull/18521))
+- Change `user_id` to unsigned integer in database session stub ([#18557](https://github.com/laravel/framework/pull/18557))
+- Improved performance of `UrlGenerator::isValidUrl()` ([#18566](https://github.com/laravel/framework/pull/18566))
+
+### Fixed
+- Handle missing or malformed `config/app.php` file ([#18466](https://github.com/laravel/framework/pull/18466), [92931cf](https://github.com/laravel/framework/commit/92931cffe48503dfe7095c23856da07de304fef2))
+- Only call `up` and `down` on migration if the method exists ([d27d94e](https://github.com/laravel/framework/commit/d27d94ed5220da3f6462c57eef122d8f40419ab1))
+- Fixed overwriting of routes with identical path and method ([#18475](https://github.com/laravel/framework/pull/18475), [5aee967](https://github.com/laravel/framework/commit/5aee9675038f0ec30ba4ed2c1eb9b544ac370c06))
+- Fixing model/route binding with identical name ([#18476](https://github.com/laravel/framework/pull/18476))
+- Allow `rollbackMigrations()` path to be with string ([#18535](https://github.com/laravel/framework/pull/18535))
+- Use `getStatusCode()` in `TestResponse::assertRedirect()` ([#18559](https://github.com/laravel/framework/pull/18559))
+- Case `parseIds()` to array in `InteractsWithPivotTable::sync()` ([#18547](https://github.com/laravel/framework/pull/18547))
+- Preserve route parameter names ([#18604](https://github.com/laravel/framework/pull/18604))
+
+
+## v5.4.16 (2017-03-21)
 
 ### Added
 - Added PHPDBG detection to `runningInConsole()` ([#18198](https://github.com/laravel/framework/pull/18198))
@@ -14,9 +84,11 @@
 - Added `Container::makeWith()` method ([#18271](https://github.com/laravel/framework/pull/18271), [#18320](https://github.com/laravel/framework/pull/18320))
 - Added `InteractsWithDatabase::assertSoftDeleted()` ([#18328](https://github.com/laravel/framework/pull/18328), [2d4e1f0](https://github.com/laravel/framework/commit/2d4e1f0fe0bae3c7e3304317a69d619e71e476cc), [f89f917](https://github.com/laravel/framework/commit/f89f917b256ad79df786c688b11247ce1e48299a))
 - Added ability to set queue parameters inside queued listeners ([#18375](https://github.com/laravel/framework/pull/18375), [cf461e2](https://github.com/laravel/framework/commit/cf461e23b6123ba6ed084d2fb8e8306482973b88))
-- Added `-q` shorthand for `make:listener --queued` ([#18362](https://github.com/laravel/framework/pull/18362))
 - Added `Model::setKeyType()` ([#18354](https://github.com/laravel/framework/pull/18354))
 - Output migration name before starting a migration or rollback ([#18379](https://github.com/laravel/framework/pull/18379), [e47e8b1](https://github.com/laravel/framework/commit/e47e8b16c1e65d752943faaa65db14ca323f5feb))
+- Added `pipeline()`, `transaction()`, and `executeRaw()` to `PhpRedisConnection` ([#18421](https://github.com/laravel/framework/pull/18421))
+- Added `@isset()` directive ([#18425](https://github.com/laravel/framework/pull/18425))
+- Added `tinyIncrements()` database schema method ([#18424](https://github.com/laravel/framework/pull/18424))
 
 ### Changed
 - Throw exception when `bootstrap/cache` directory is not writable ([#18188](https://github.com/laravel/framework/pull/18188), [b4f0005](https://github.com/laravel/framework/commit/b4f000516166b0694e842d64f5b2fde1167d4690))
@@ -33,6 +105,9 @@
 - Use `getAuthIdentifier()` method in broadcasters ([#18351](https://github.com/laravel/framework/pull/18351))
 - Use atomic cache operation when checking for event overlaps ([8ebb5b8](https://github.com/laravel/framework/commit/8ebb5b859ae8f2382a1836a83a47542de234d63a))
 - Return pretty JSON response from `HasInDatabase::failureDescription()` ([#18377](https://github.com/laravel/framework/pull/18377))
+- Allow Validator extension to use array-style callable ([#18399](https://github.com/laravel/framework/pull/18399))
+- Pass the condition value to query builder's `when()` method ([#18419](https://github.com/laravel/framework/pull/18419))
+- Don't require returning the query from `when()` method ([#18422](https://github.com/laravel/framework/pull/18422))
 
 ### Fixed
 - Fixed an issue with slots when passed content equals `null` ([#18246](https://github.com/laravel/framework/pull/18246))
@@ -43,6 +118,9 @@
 - Allow `ImplicitRouteBinding` to match camelcase method parameter names ([#18307](https://github.com/laravel/framework/pull/18307), [4ae31a1](https://github.com/laravel/framework/commit/4ae31a154f81c2d76c7397dbdebfcac0e74e4ccd))
 - Fixing weird behaviour of `Connection::getConfig()` when `null` was passed ([#18356](https://github.com/laravel/framework/pull/18356))
 - Attempt to solve an issue with using `required_*` rules while the `ConvertEmptyStringToNull` middleware is applied ([#18376](https://github.com/laravel/framework/pull/18376))
+- Fixed faking of model events ([d6cb75c](https://github.com/laravel/framework/commit/d6cb75c057009c6316d4efd865dccb3c4a5c7b36))
+- Prevent model event result from firing observable events ([#18401](https://github.com/laravel/framework/pull/18401), [0607db0](https://github.com/laravel/framework/commit/0607db02ba9eeab0a22abe1dabb19536f4aa1ff2))
+- Fix issue in `authorizeResource()` with compound names ([#18435](https://github.com/laravel/framework/pull/18435))
 
 
 ## v5.4.15 (2017-03-02)
@@ -349,7 +427,7 @@
 - Added higher-order messages for the collections ([#16267](https://github.com/laravel/framework/pull/16267), [e276b3d](https://github.com/laravel/framework/commit/e276b3d4bf2a124c4eb5975a8a2724b8c806139a), [2b7ab30](https://github.com/laravel/framework/commit/2b7ab30e0ec56ac4e4093d7f2775da98086c8000), [#16274](https://github.com/laravel/framework/pull/16274), [724950a](https://github.com/laravel/framework/commit/724950a42c225c7b53c56283c01576b050fea37a), [#17000](https://github.com/laravel/framework/pull/17000))
 - Allow collection macros to be proxied ([#16749](https://github.com/laravel/framework/pull/16749))
 - Added operator support to `Collection::contains()` method ([#16791](https://github.com/laravel/framework/pull/16791))
-- Added `Collection::every()` method ([#16777](https://github.com/laravel/framework/pull/16777))
+- Renamed `every()` method to `nth()` and added new `every()` to determine if all items pass the given test ([#16777](https://github.com/laravel/framework/pull/16777))
 - Allow passing an array to `Collection::find()` ([#16849](https://github.com/laravel/framework/pull/16849))
 - Always return a collection when calling `Collection::random()` with a parameter ([#16865](https://github.com/laravel/framework/pull/16865))
 - Don't renumber the keys and keep the input array order in `mapWithKeys()` ([#16564](https://github.com/laravel/framework/pull/16564))
