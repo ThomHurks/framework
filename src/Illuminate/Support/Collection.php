@@ -588,6 +588,7 @@ class Collection implements ArrayAccess, Arrayable, Countable, IteratorAggregate
                     $groupKeys = [$groupKeys];
                 }
                 foreach ($groupKeys as $groupKey) {
+                    $groupKey = is_bool($groupKey) ? (int) $groupKey : $groupKey;
                     foreach ($currentLevel as &$subGroup) {
                         if (! array_key_exists($groupKey, $subGroup)) {
                             $subGroup[$groupKey] = [];
